@@ -2,7 +2,13 @@ body {
   background-color: rgba(0, 255, 255, 0.452);
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 h1 {
   color: white;
+  border: 1px solid black;
   font-family: sans-serif;
 }
