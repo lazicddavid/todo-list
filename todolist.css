@@ -8,7 +8,9 @@ body {
 }
 
 h1 {
+  padding: 20px 100px;
+  background-color: rgba(63, 205, 87, 0.901);
   color: white;
-  border: 1px solid black;
+
   font-family: sans-serif;
 }
