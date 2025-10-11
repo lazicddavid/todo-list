@@ -16,4 +16,6 @@ h1 {
 }
 
 .input-task {
+  border-radius: 5px;
+  padding: 20px 100px;
 }
