@@ -1,5 +1,5 @@
 body {
-  background-color: rgba(0, 255, 255, 0.452);
+  background-color: aqua;
 }
 
 .container {
@@ -8,8 +8,9 @@ body {
 }
 
 h1 {
+  border-radius: 5px;
   padding: 20px 100px;
-  background-color: rgba(63, 205, 87, 0.901);
+  background-color: rgba(205, 113, 63, 0.918);
   color: white;
 
   font-family: sans-serif;
