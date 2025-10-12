@@ -5,6 +5,7 @@ body {
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 h1 {
@@ -16,6 +17,14 @@ h1 {
 }
 
 .input-task {
-  border-radius: 5px;
-  padding: 20px 100px;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  background-color: black;
+}
+
+
+.img {
+  
+}
 }
