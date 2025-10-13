@@ -8,17 +8,14 @@ body {
   justify-content: center;
 }
 
-/* KARTICA */
 .container {
   width: 550px;
   max-width: 92vw;
-  background: #e9f6f6; /* svetloplavi donji deo */
+  background: white;
   border-radius: 16px;
-  box-shadow: 0 26px 40px rgba(0, 0, 0, 0.28);
-  overflow: hidden; /* da važi zaobljenje i unutra */
+  overflow: hidden;
 }
 
-/* GORNJI CRVENI HEADER */
 .card__header {
   background: #f27878;
   padding: 30px 32px;
@@ -29,11 +26,9 @@ body {
   margin: 0;
   color: #ffffff;
   font-weight: bold;
-  letter-spacing: 0.35em; /* razmaknuta slova kao na slici */
   font-size: 28px;
 }
 
-/* BEŽ POJAS SA INPUTOM */
 .input-task {
   background: #f2e5bf;
   padding: 18px 24px;
@@ -45,12 +40,8 @@ body {
   background: transparent;
   font-size: 1.6rem;
   color: #2a2a2a;
-  outline: none; /* bez plavog okvira */
+  outline: none;
   padding: 6px 2px;
-}
-
-#input::placeholder {
-  color: #6e6e6e;
 }
 
 /* (opciono) listu zadataka ako dodaješ ispod inputa */
