@@ -1,15 +1,9 @@
-/***********************
- * 1) DOM ELEMENTI
- ***********************/
 const DOMElements = {
   form: document.getElementById("form"),
   input: document.getElementById("input"),
   list: document.getElementById("list"),
 };
 
-/***********************
- * 2) (Opcioni) STATE
- ***********************/
 const todoManager = {
   todos: [],
   add(text) {
@@ -19,9 +13,6 @@ const todoManager = {
   },
 };
 
-/***********************
- * 3) INPUT MANAGER
- ***********************/
 const inputManager = {
   textValue: "",
   setFromEvent(e) {
@@ -32,23 +23,6 @@ const inputManager = {
     DOMElements.input.value = "";
   },
 };
-
-/***********************
- * Pomocna: escape za tekst
- ***********************/
-function escapeHtml(str) {
-  return str.replace(
-    /[&<>"']/g,
-    (m) =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;",
-      }[m])
-  );
-}
 
 /***********************
  * Kreiranje JEDNE stavke (sa FA ikonicama)
@@ -65,6 +39,8 @@ function createTodoElement(text) {
       <button class="icon-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
     </div>
   `;
+
+  el.querySelector(".todo-text").textContent = text;
   return el;
 }
 
