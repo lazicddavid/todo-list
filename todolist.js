@@ -1,144 +1,88 @@
-/* 
-const DOMElements = {
-  buttonNewBook = document.getElementById("btnNewBook");
-}
-const bookManager = {
-  library: [],
-  addBook(book) {
-    this.library.push(book)
-  }
-} 
-
-const inputManager = {
-  titleValue: "";
-}
-*/
-console.log("-----------------------");
-/*************************
+/***********************
  * 1) DOM ELEMENTI
- *************************/
+ ***********************/
 const DOMElements = {
-  form: document.getElementById("form"), // <form id="form"> (preporučeno da dodaš oko inputa)
+  form: document.getElementById("form"),
   input: document.getElementById("input"),
-  list: document.getElementById("list"), // <div id="list" class="todo-list">
+  list: document.getElementById("list"),
 };
 
-/*************************
- * 2) STATE & LOGIKA (Manager)
- *************************/
+/***********************
+ * 2) (Opcioni) STATE
+ ***********************/
 const todoManager = {
   todos: [],
-
-  addTodo(text) {
-    const todo = {
-      id: crypto.randomUUID(),
-      text: text,
-      done: false,
-      createdAt: Date.now(),
-    };
+  add(text) {
+    const todo = { id: crypto.randomUUID(), text };
     this.todos.push(todo);
-  },
-
-  toggleDone(id) {
-    const item = this.todos.find((t) => t.id === id);
-    if (item) item.done = !item.done;
-  },
-
-  removeTodo(id) {
-    this.todos = this.todos.filter((t) => t.id !== id);
+    return todo;
   },
 };
 
-/*************************
+/***********************
  * 3) INPUT MANAGER
- *************************/
+ ***********************/
 const inputManager = {
   textValue: "",
-
   setFromEvent(e) {
     this.textValue = e.target.value;
   },
-
   clear() {
     this.textValue = "";
     DOMElements.input.value = "";
   },
 };
 
-/*************************
- * RENDER (uvek iz niza)
- *************************/
-function render() {
-  DOMElements.list.innerHTML = "";
-  todoManager.todos.forEach((t) => {
-    const div = document.createElement("div");
-    div.className = "todo-item";
-    div.dataset.id = t.id;
-
-    div.innerHTML = `
-      <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
-        <input type="checkbox" ${t.done ? "checked" : ""} />
-        <span style="${
-          t.done ? "text-decoration: line-through; opacity: .6;" : ""
-        }">
-          ${t.text}
-        </span>
-      </label>
-      <button class="btn-remove" style="margin-left:auto;">✕</button>
-    `;
-
-    // mala raspodela da dugme ode desno
-    div.style.display = "flex";
-    div.style.alignItems = "center";
-    div.style.gap = "10px";
-
-    DOMElements.list.appendChild(div);
-  });
+/***********************
+ * Pomocna: escape za tekst
+ ***********************/
+function escapeHtml(str) {
+  return str.replace(
+    /[&<>"']/g,
+    (m) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[m])
+  );
 }
 
-/*************************
- * LISTENERS (selektori su gore)
- *************************/
-// 1) unos teksta u input
-DOMElements.input.addEventListener("input", (e) => {
-  inputManager.setFromEvent(e);
-});
+/***********************
+ * Kreiranje JEDNE stavke (sa FA ikonicama)
+ ***********************/
+function createTodoElement(text) {
+  const el = document.createElement("div");
+  el.className = "todo-item";
 
-// 2) submit forme (Enter u inputu)
-if (DOMElements.form) {
-  DOMElements.form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const text = inputManager.textValue.trim();
-    if (!text) return;
-
-    todoManager.addTodo(text);
-    inputManager.clear();
-    render();
-  });
+  el.innerHTML = `
+    <span class="todo-text">${escapeHtml(text)}</span>
+    <div class="actions">
+      <button class="icon-btn" title="Mark"><i class="fa-regular fa-square-check"></i></button>
+      <button class="icon-btn" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button class="icon-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  `;
+  return el;
 }
 
-// 3) delegacija nad listom: checkbox toggle + brisanje
-DOMElements.list.addEventListener("click", (e) => {
-  const item = e.target.closest(".todo-item");
-  if (!item) return;
+/***********************
+ * LISTENERS
+ ***********************/
+DOMElements.input.addEventListener("input", (e) =>
+  inputManager.setFromEvent(e)
+);
 
-  const id = item.dataset.id;
+DOMElements.form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = inputManager.textValue.trim();
+  if (!text) return;
 
-  // klik na dugme za brisanje
-  if (e.target.classList.contains("btn-remove")) {
-    todoManager.removeTodo(id);
-    render();
-    return;
-  }
+  const todo = todoManager.add(text);
+  const node = createTodoElement(todo.text);
+  DOMElements.list.appendChild(node);
+
+  inputManager.clear();
 });
-
-DOMElements.list.addEventListener("change", (e) => {
-  if (e.target.matches('input[type="checkbox"]')) {
-    const id = e.target.closest(".todo-item").dataset.id;
-    todoManager.toggleDone(id);
-    render();
-  }
-});
-
-// inicijalno
-render();

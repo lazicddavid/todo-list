@@ -2,15 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Font Awesome (ikonice) -->
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2Pkf1R9VIvE1jXap50lH+0hVQv5nUrYcC2xT902tqdy7o6Yx4Ck+Y8C4iw=="
-      crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- Tvoj CSS -->
+
     <link rel="stylesheet" href="todolist.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do-List</title>
@@ -21,31 +19,13 @@
         <h1 class="card__title">TO - DO LIST</h1>
       </div>
 
-      <!-- Žuti pojas sa inputom -->
       <div class="input-task">
         <form id="form" autocomplete="off">
           <input id="input" type="text" placeholder="Add a new task here..." />
         </form>
       </div>
 
-      <!-- Lista zadataka (JS dodaje nove .todo-item) -->
-      <div id="list" class="todo-list">
-        <!-- Primer jedne stavke (opciono, možeš obrisati) -->
-        <div class="todo-item">
-          <span class="todo-text">Primer taska</span>
-          <div class="actions">
-            <button class="icon-btn" title="Mark">
-              <i class="fa-regular fa-square-check"></i>
-            </button>
-            <button class="icon-btn" title="Edit">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button class="icon-btn" title="Delete">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      <div id="list" class="todo-list"></div>
     </div>
 
     <script src="todolist.js"></script>
