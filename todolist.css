@@ -8,7 +8,6 @@ body {
   justify-content: center;
 }
 
-/* KARTICA */
 .container {
   width: 550px;
   max-width: 92vw;
@@ -18,7 +17,6 @@ body {
   box-shadow: 0 26px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* HEADER */
 .card__header {
   background: #f27878;
   padding: 30px 32px;
@@ -33,7 +31,6 @@ body {
   letter-spacing: 0.35em;
 }
 
-/* POJAS SA INPUTOM */
 .input-task {
   background: #f2e5bf;
   padding: 18px 24px;
@@ -50,15 +47,13 @@ body {
 }
 
 #input::placeholder {
-  color: #6e6e6e;
+  color: silver;
 }
 
-/* LISTA ZADATAKA */
 .todo-list {
   padding: 18px 24px;
 }
 
-/* Jedan red stavke: tekst levo + ikonice desno */
 .todo-item {
   display: flex;
   align-items: center;
@@ -73,7 +68,6 @@ body {
   color: #1f1f1f;
 }
 
-/* Desni blok sa ikonicama */
 .actions {
   margin-left: auto;
   display: flex;
@@ -81,21 +75,19 @@ body {
   gap: 14px;
 }
 
-/* Dugmići-ikonice (samo vizuelno) */
 .icon-btn {
   border: none;
   background: transparent;
   padding: 0;
   opacity: 0.9;
-  cursor: default; /* samo vizuelno, nije "klikabilno" */
+  cursor: default;
 }
 
 .icon-btn:hover {
   opacity: 1;
 }
 
-/* Font Awesome ikonice unutar dugmeta */
 .icon-btn i {
   font-size: 20px;
-  color: #39424e;
+  color: blue;
 }
