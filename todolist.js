@@ -13,12 +13,12 @@ const taskList = {
   },
 };
 
-const inputState = {
+const taskInput = {
   text: "",
-  change(e) {
+  handleInput(e) {
     this.text = e.target.value;
   },
-  clear() {
+  reset() {
     this.text = "";
     DOMElements.input.value = "";
   },
