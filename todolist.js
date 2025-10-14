@@ -13,6 +13,9 @@ const inputManager = {
   titleValue: "";
 }
 */
+
+console.log("---------------------------");
+
 const DOMElements = {
   form: document.getElementById("form"),
   input: document.getElementById("input"),
