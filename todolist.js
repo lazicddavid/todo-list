@@ -4,49 +4,45 @@ const DOMElements = {
   list: document.getElementById("list"),
 };
 
-const todoManager = {
-  todos: [],
+const taskList = {
+  tasks: [],
   add(text) {
-    const todo = { id: crypto.randomUUID(), text };
-    this.todos.push(todo);
-    return todo;
+    const item = { id: crypto.randomUUID(), text };
+    this.tasks.push(item);
+    return item;
   },
 };
 
-const inputManager = {
-  textValue: "",
-  setFromEvent(e) {
-    this.textValue = e.target.value;
+const inputState = {
+  text: "",
+  change(e) {
+    this.text = e.target.value;
   },
   clear() {
-    this.textValue = "";
+    this.text = "";
     DOMElements.input.value = "";
   },
 };
 
-/***********************
- * Kreiranje JEDNE stavke (sa FA ikonicama)
- ***********************/
 function createTodoElement(text) {
   const el = document.createElement("div");
   el.className = "todo-item";
 
-  el.innerHTML = `
-    <span class="todo-text">${escapeHtml(text)}</span>
-    <div class="actions">
-      <button class="icon-btn" title="Mark"><i class="fa-regular fa-square-check"></i></button>
-      <button class="icon-btn" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-      <button class="icon-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-    </div>
+  const span = document.createElement("span");
+  span.className = "todo-text";
+  span.textContent = text;
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  actions.innerHTML = `
+    <button class="icon-btn" title="Mark"><i class="fa-regular fa-square-check"></i></button>
+    <button class="icon-btn" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="icon-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
   `;
 
-  el.querySelector(".todo-text").textContent = text;
+  el.append(span, actions);
   return el;
 }
-
-/***********************
- * LISTENERS
- ***********************/
 DOMElements.input.addEventListener("input", (e) =>
   inputManager.setFromEvent(e)
 );
