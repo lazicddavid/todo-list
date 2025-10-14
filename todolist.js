@@ -1,3 +1,18 @@
+/*
+const DOMElements = {
+  buttonNewBook = document.getElementById("btnNewBook");
+}
+const bookManager = {
+  library: [],
+  addBook(book) {
+    this.library.push(book)
+  }
+} 
+
+const inputManager = {
+  titleValue: "";
+}
+*/
 const DOMElements = {
   form: document.getElementById("form"),
   input: document.getElementById("input"),
@@ -15,7 +30,7 @@ const taskList = {
 
 const taskInput = {
   text: "",
-  handleInput(e) {
+  changeInput(e) {
     this.text = e.target.value;
   },
   reset() {
@@ -24,9 +39,9 @@ const taskInput = {
   },
 };
 
-function createTodoElement(text) {
-  const el = document.createElement("div");
-  el.className = "todo-item";
+function createTodoElement(text, id) {
+  const element = document.createElement("div");
+  element.className = "todo-item";
 
   const span = document.createElement("span");
   span.className = "todo-text";
@@ -40,21 +55,20 @@ function createTodoElement(text) {
     <button class="icon-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
   `;
 
-  el.append(span, actions);
-  return el;
+  element.append(span, actions);
+  return element;
 }
-DOMElements.input.addEventListener("input", (e) =>
-  inputManager.setFromEvent(e)
-);
+
+DOMElements.input.addEventListener("input", (e) => taskInput.changeInput(e));
 
 DOMElements.form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const text = inputManager.textValue.trim();
+  const text = taskInput.text.trim();
   if (!text) return;
 
-  const todo = todoManager.add(text);
-  const node = createTodoElement(todo.text);
-  DOMElements.list.appendChild(node);
+  const item = taskList.add(text);
+  const newTask = createTodoElement(item.text, item.id);
+  DOMElements.list.appendChild(newTask);
 
-  inputManager.clear();
+  taskInput.reset();
 });
