@@ -14,7 +14,6 @@ body {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 26px 40px rgba(0, 0, 0, 0.18);
 }
 
 .card__header {
@@ -95,5 +94,5 @@ body {
 
 .icon-btn i {
   font-size: 20px;
-  color: rgb(0, 208, 255);
+  color: peru;
 }
