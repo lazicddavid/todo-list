@@ -31,7 +31,7 @@ body {
 }
 
 .input-task {
-  background: #f2e5bf;
+  background: #edf2bf;
   padding: 18px 24px;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 #input::placeholder {
-  color: silver;
+  color: #c0c0c0;
 }
 
 .todo-list {
@@ -95,4 +95,7 @@ body {
 .icon-btn i {
   font-size: 20px;
   color: peru;
+}
+
+.icon-btn {
 }
