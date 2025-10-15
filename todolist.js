@@ -94,3 +94,9 @@ DOMElements.form.addEventListener("submit", (e) => {
 //prikazivanje
 
 //izbaciti item.text i item.id
+
+function pozdravi() {
+  console.log("zdravo");
+}
+
+pozdravi();
