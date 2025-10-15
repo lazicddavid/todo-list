@@ -100,3 +100,10 @@ function pozdravi() {
 }
 
 pozdravi();
+
+const osoba = {
+  ime: "Bojana",
+  pozdravi: function () {
+    console.log("Zdravo, " + thios.ime + "!");
+  },
+};
