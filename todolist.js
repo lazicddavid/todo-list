@@ -104,6 +104,10 @@ pozdravi();
 const osoba = {
   ime: "Bojana",
   pozdravi: function () {
-    console.log("Zdravo, " + thios.ime + "!");
+    console.log("Zdravo, " + this.ime + "!");
   },
 };
+
+l;
+
+let name = david;
