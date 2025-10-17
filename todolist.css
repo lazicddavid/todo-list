@@ -99,4 +99,5 @@ body {
 
 .todo-item {
   background-color: #16c0c0;
+  padding: 10px 10px auto;
 }
