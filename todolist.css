@@ -97,7 +97,6 @@ body {
   color: peru;
 }
 
-.icon-btn:hover {
+.todo-item {
   background-color: #16c0c0;
-  color: #16c0c0;
 }
