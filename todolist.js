@@ -110,3 +110,4 @@ document.querySelector('.check').add ('click' function () {
   }
 }
 )
+console.log()
