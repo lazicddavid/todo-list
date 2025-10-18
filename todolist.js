@@ -99,15 +99,10 @@ function pozdravi() {
   console.log("zdravo");
 }
 
-pozdravi();
 
-const osoba = {
-  ime: "Bojana",
-  pozdravi: function () {
-    console.log("Zdravo, " + this.ime + "!");
-  },
-};
 
-l;
-
-let name = david;
+document.querySelector('.check').add ('click' function () {
+  const guess = Number(document.querySelector('.guess').value);
+  console.log(guess, typeof guess);
+}
+)

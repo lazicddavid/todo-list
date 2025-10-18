@@ -96,11 +96,3 @@ body {
   font-size: 20px;
   color: peru;
 }
-
-.todo-item {
-  height: 10px;
-  margin: auto;
-  text-align: center;
-  background-color: #16c0c0;
-  padding: 10px 10px auto;
-}
