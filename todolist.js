@@ -31,14 +31,14 @@ const taskList = {
   },
 };
 
-function createTodoElement(text, id) {
+function createTodoElement(item) {
   const element = document.createElement("div");
   element.className = "todo-item";
-  element.dataset.id = id;
+  element.dataset.id = item.id;
 
   const span = document.createElement("span");
   span.className = "todo-text";
-  span.textContent = text;
+  span.textContent = item.text;
 
   const actions = document.createElement("div");
   actions.className = "actions";
@@ -51,7 +51,6 @@ function createTodoElement(text, id) {
   element.append(span, actions);
   return element;
 }
-
 const taskInput = {
   value: "",
   changeInput(value) {
