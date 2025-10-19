@@ -103,7 +103,7 @@ body {
   transition: transform 0.5 ease;
 }
 
-fa-square-check:hover {
+.fa-square-check:hover {
   color: #c64b4b;
   transform: rotate(15deg);
   transition: transform 0.5 ease;
