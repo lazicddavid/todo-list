@@ -34,6 +34,7 @@ const taskList = {
 function createTodoElement(text, id) {
   const element = document.createElement("div");
   element.className = "todo-item";
+  element.dataset.id = id;
 
   const span = document.createElement("span");
   span.className = "todo-text";
@@ -50,6 +51,7 @@ function createTodoElement(text, id) {
   element.append(span, actions);
   return element;
 }
+
 const taskInput = {
   value: "",
   changeInput(value) {
@@ -57,57 +59,33 @@ const taskInput = {
   },
   reset() {
     this.value = "";
+    DOMElements.input.value = "";
   },
   getValue() {
     return this.value;
   },
 };
-function createTask(textValue) {
-  return {
-    text: textValue,
-    id: crypto.randomUUID(),
-    reset() {
-      this.text = "";
-    },
-    getText() {
-      return this.text;
-    },
-  };
-}
 
-DOMElements.input.addEventListener("input", (e) =>
-  taskInput.changeInput(e.target.value)
-);
+DOMElements.input.addEventListener("input", (e) => {
+  taskInput.changeInput(e.target.value);
+});
 
 DOMElements.form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const task = createTask(taskInput.getValue());
-  console.log(task);
-  taskList.add(task);
+
+  const text = taskInput.getValue().trim();
+  if (!text) return;
+
+  // dodaj u niz i odmah prikaži
+  const item = taskList.add(text);
   const newTask = createTodoElement(item.text, item.id);
   DOMElements.list.appendChild(newTask);
 
   taskInput.reset();
+  DOMElements.input.focus();
 });
 
 //brisanje
 //prikazivanje
 
 //izbaciti item.text i item.id
-
-function pozdravi() {
-  console.log("zdravo");
-}
-
-
-
-document.querySelector('.check').add ('click' function () {
-  const guess = Number(document.querySelector('.guess').value);
-  console.log(guess, typeof guess);
-  
-  if (!guess) {
-    document.querySelector('.message').textContent 'no number';
-  }
-}
-)
-console.log()
