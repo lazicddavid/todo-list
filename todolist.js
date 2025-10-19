@@ -22,12 +22,21 @@ const DOMElements = {
   list: document.getElementById("list"),
 };
 
+//napravi metodu editTask
+//da se precrta kad je uradjen
+//dodaj dugme clear all tasks
+//ono treba da bude vidljivo samo ako ima jedan ili vise taskova
+//kad se klikne na njega svi se taskovi isprazne
+
 const taskList = {
   tasks: [],
   add(text) {
-    const item = { id: crypto.randomUUID(), text };
+    const item = { id: crypto.randomUUID(), text, isDone: false };
     this.tasks.push(item);
     return item;
+  },
+  remove(id) {
+    this.tasks = this.tasks.filter((item) => item.id !== id);
   },
 };
 
@@ -82,7 +91,6 @@ DOMElements.form.addEventListener("submit", (e) => {
   DOMElements.list.appendChild(newTask);
 
   taskInput.reset();
-  DOMElements.input.focus();
 });
 
 DOMElements.list.addEventListener("click", (e) => {
@@ -91,9 +99,8 @@ DOMElements.list.addEventListener("click", (e) => {
     if (!taskEl) return;
 
     const id = taskEl.dataset.id;
-
     taskList.tasks = taskList.tasks.filter((item) => item.id !== id);
-
+    taskList.remove(id);
     taskEl.remove();
   }
 });
