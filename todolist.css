@@ -100,9 +100,10 @@ body {
 .fa-trash:hover {
   color: #c64b4b;
   transform: rotate(15deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.8s ease;
 }
 
-fa-square-check: hover {
-
+fa-square-check:hover {
+  color: #c64b4b;
+  transform: scale(3) translate(-33.1%, 20.2%);
 }
