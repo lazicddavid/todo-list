@@ -78,7 +78,8 @@ DOMElements.form.addEventListener("submit", (e) => {
 
   //prikazivaanje//
   const item = taskList.add(text);
-  const newTask = createTodoElement(item.text, item.id);
+  const newTask = createTodoElement(item);
+
   DOMElements.list.appendChild(newTask);
 
   taskInput.reset();
