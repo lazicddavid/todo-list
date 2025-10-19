@@ -87,7 +87,13 @@ DOMElements.form.addEventListener("submit", (e) => {
 
 
 
-DOMElements.list.addEventListener("click", (e) => 
+DOMElements.list.addEventListener("click", (e) => {
+ 
+  if (e.target.closest(".fa-trash")) {
+    const taskEl = e.target.closest(".todo-item");
+    if (!taskEl) return;
+  }
+}
 
 //brisanje
 //prikazivanje
