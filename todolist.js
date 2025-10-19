@@ -76,7 +76,7 @@ DOMElements.form.addEventListener("submit", (e) => {
   const text = taskInput.getValue().trim();
   if (!text) return;
 
-  // dodaj u niz i odmah prikaži
+  //prikazivaanje//
   const item = taskList.add(text);
   const newTask = createTodoElement(item.text, item.id);
   DOMElements.list.appendChild(newTask);
@@ -84,6 +84,10 @@ DOMElements.form.addEventListener("submit", (e) => {
   taskInput.reset();
   DOMElements.input.focus();
 });
+
+
+
+DOMElements.list.addEventListener("click", (e) => 
 
 //brisanje
 //prikazivanje
