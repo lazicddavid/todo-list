@@ -98,5 +98,6 @@ body {
 }
 
 .fa-trash:hover {
-  color: #edf2bf;
+  color: #c64b4b;
+  transform: rotate(15deg);
 }
