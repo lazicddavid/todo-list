@@ -85,17 +85,16 @@ DOMElements.form.addEventListener("submit", (e) => {
   DOMElements.input.focus();
 });
 
-
-
 DOMElements.list.addEventListener("click", (e) => {
- 
   if (e.target.closest(".fa-trash")) {
     const taskEl = e.target.closest(".todo-item");
     if (!taskEl) return;
+    const id = teskEl.dataset.id;
   }
-}
+  taskList.tasks = taskInput.tasks.filter((item) => item.id !== id);
 
+  taskEl.remove();
+});
 //brisanje
 //prikazivanje
-
 //izbaciti item.text i item.id
