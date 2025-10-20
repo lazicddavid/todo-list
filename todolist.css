@@ -111,4 +111,5 @@ body {
 
 .card__header {
   padding: 30px auto;
+  align-items: center;
 }
