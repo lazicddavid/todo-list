@@ -104,3 +104,10 @@ DOMElements.list.addEventListener("click", (e) => {
     taskEl.remove();
   }
 });
+
+DOMElements.list.addEventListener("click", (e) =>
+  if (e.target.closest(".fa-solid .fa-pen-to-square")) {
+
+  }
+
+)

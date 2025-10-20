@@ -108,8 +108,3 @@ body {
   transform: rotate(15deg);
   transition: transform 0.5 ease;
 }
-
-.card__header {
-  padding: 30px auto;
-  align-items: center;
-}
