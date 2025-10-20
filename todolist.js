@@ -104,7 +104,3 @@ DOMElements.list.addEventListener("click", (e) => {
     taskEl.remove();
   }
 });
-
-//brisanje
-//prikazivanje
-//izbaciti item.text i item.id
