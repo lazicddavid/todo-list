@@ -104,16 +104,3 @@ DOMElements.list.addEventListener("click", (e) => {
     taskEl.remove();
   }
 });
-
-DOMElements.list.addEventListener("click", (e) => {
-  if (e.target.closest(".fa-solid.fa-pen-to-square")) {
-    const taskList = {
-      tasks: [],
-      edit(id, newText) {
-        const item = this.tasks.find((task) => task.id === id);
-        if (item) item.text = newText;
-      },
-    };
-    taskList.edit(id, newText);
-  }
-});
