@@ -19,6 +19,7 @@ body {
 .container {
   padding: 10px;
   margin: auto;
+  color: #16c0c0;
 }
 .card__header {
   background: #f27878;
