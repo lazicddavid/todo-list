@@ -104,6 +104,17 @@ DOMElements.list.addEventListener("click", (e) => {
     taskEl.remove();
   }
 
+  if (e.target.closest(".fa-pen-to-square")) {
+    const taskEl = e.target.closest(".todo-item");
+    const id = taskEl.dataset.id;
+    const newText = DOMElements.input.value.trim();
+
+    if (!newText) return;
+
+    taskList.edit(id, newText);
+    taskEl.querySelector(".todo-text").textContent = newText;
+  }
+
   const taskList = {
     tasks: [],
     edit(id, newText) {
