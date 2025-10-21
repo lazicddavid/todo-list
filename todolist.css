@@ -16,6 +16,9 @@ body {
   overflow: hidden;
 }
 
+.container {
+  padding: 10pxg;
+}
 .card__header {
   background: #f27878;
   padding: 30px 32px;
