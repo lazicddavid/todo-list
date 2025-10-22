@@ -127,5 +127,6 @@ body {
 
 #ClearAll {
   cursor: pointer;
+  border-radius: 10px;
   color: #16c0c0;
 }
