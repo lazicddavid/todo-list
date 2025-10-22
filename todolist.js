@@ -13,6 +13,11 @@ const inputManager = {
   titleValue: "";
 }
 */
+//napravi metodu editTask
+//da se precrta kad je uradjen
+//dodaj dugme clear all tasks
+//ono treba da bude vidljivo samo ako ima jedan ili vise taskova
+//kad se klikne na njega svi se taskovi isprazne
 
 console.log("---------------------------");
 
@@ -20,13 +25,8 @@ const DOMElements = {
   form: document.getElementById("form"),
   input: document.getElementById("input"),
   list: document.getElementById("list"),
+  clearAll: document.getElementById("clearAll"),
 };
-
-//napravi metodu editTask
-//da se precrta kad je uradjen
-//dodaj dugme clear all tasks
-//ono treba da bude vidljivo samo ako ima jedan ili vise taskova
-//kad se klikne na njega svi se taskovi isprazne
 
 const taskList = {
   tasks: [],
@@ -37,6 +37,17 @@ const taskList = {
   },
   remove(id) {
     this.tasks = this.tasks.filter((item) => item.id !== id);
+  },
+  edit(id, newText) {
+    const item = this.tasks.find((task) => task.id === id);
+    if (item) item.text = newText;
+  },
+  toggleDone(id) {
+    const t = this.tasks.find((x) => x.id === id);
+    if (t) t.isDone = !t.isDone;
+  },
+  clear() {
+    this.tasks = [];
   },
 };
 
@@ -84,62 +95,33 @@ DOMElements.form.addEventListener("submit", (e) => {
   const text = taskInput.getValue().trim();
   if (!text) return;
 
-  //prikazivaanje//
   const item = taskList.add(text);
   const newTask = createTodoElement(item);
-
   DOMElements.list.appendChild(newTask);
 
   taskInput.reset();
 });
 
 DOMElements.list.addEventListener("click", (e) => {
+  // DELETE
   if (e.target.closest(".fa-trash")) {
     const taskEl = e.target.closest(".todo-item");
     if (!taskEl) return;
 
     const id = taskEl.dataset.id;
-    taskList.tasks = taskList.tasks.filter((item) => item.id !== id);
     taskList.remove(id);
     taskEl.remove();
   }
 
-  if (e.target.closest(".fa-pen-to-square")) {
+  if (e.target.closest('button[title="Edit"], .fa-pen-to-square')) {
     const taskEl = e.target.closest(".todo-item");
+    if (!taskEl) return;
+
     const id = taskEl.dataset.id;
     const newText = DOMElements.input.value.trim();
-
     if (!newText) return;
 
     taskList.edit(id, newText);
     taskEl.querySelector(".todo-text").textContent = newText;
   }
-
-  const taskList = {
-    tasks: [],
-    edit(id, newText) {
-      const item = this.tasks.find((task) => task.id === id);
-      if (item) item.text = newText;
-    },
-  };
-
-  DOMElements.list.addEventListener("click", (e) => {
-    if (e.target.closest(".fa-solid.fa-pen-to-square")) {
-      taskList.edit(id, newText);
-    }
-  });
 });
-/*const taskList = {
-  tasks: [],
-  edit(id, newText) {
-    const item = this.tasks.find((task) => task.id === id);
-    if (item) item.text = newText;
-  },
-};
-
-DOMElements.list.addEventListener("click", (e) => {
-  if (e.target.closest(".fa-solid.fa-pen-to-square")) {
-    taskList.edit(id, newText);
-  }
-});
-*/
