@@ -265,33 +265,24 @@ DOMElements.list.addEventListener("click", (e) => {
   if (!taskEl) return;
   const id = taskEl.dataset.id;
 
-  // MARK (toggle done)
+  //oznaka za uradjene taskove//
   if (e.target.closest('button[title="Mark"], .fa-square-check')) {
     taskList.toggleDone(id);
     updateList();
     return;
   }
 
-  // EDIT — jednostavna verzija bez prompta
+  //editTask
   if (e.target.closest('button[title="Edit"], .fa-pen-to-square')) {
     const textEl = taskEl.querySelector(".todo-text");
     const currentText = textEl.textContent;
 
-    // napravi input umesto spana
     const input = document.createElement("input");
     input.type = "text";
     input.value = currentText;
     input.className = "edit-input";
 
-    // zameni span inputom
     taskEl.replaceChild(input, textEl);
-    input.focus();
-
-    // kada se pritisne Enter ili izgubi fokus — ažuriraj
-    input.addEventListener("blur", saveChange);
-    input.addEventListener("keydown", (ev) => {
-      if (ev.key === "Enter") saveChange();
-    });
 
     function saveChange() {
       const newText = input.value.trim();

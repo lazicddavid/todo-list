@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-  position: relative;
+  /*position: relative;*/
   width: 550px;
   max-width: 92vw;
   background: white;
@@ -117,10 +117,6 @@ body {
 }
 
 #clearAll {
-  position: absolute;
-  top: 65%;
-  right: 10px;
-
   cursor: pointer;
   color: #271e1e;
   border-radius: 10px;
