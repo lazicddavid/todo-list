@@ -128,7 +128,6 @@ DOMElements.list.addEventListener("click", (e) => {
     return;
   }
 
-  //editTask
   if (e.target.closest('button[title="Edit"], .fa-pen-to-square')) {
     const textEl = taskEl.querySelector(".todo-text");
     const currentText = textEl.textContent;
@@ -139,7 +138,7 @@ DOMElements.list.addEventListener("click", (e) => {
     input.className = "edit-input";
 
     taskEl.replaceChild(input, textEl);
-
+    console.log(taskList);
     function saveChange() {
       const newText = input.value;
       if (newText) {
@@ -157,7 +156,6 @@ DOMElements.list.addEventListener("click", (e) => {
   }
 });
 
-//clear all opcija//
 DOMElements.clearAll.addEventListener("click", () => {
   if (!taskList.tasks.length) return;
   taskList.clear();
