@@ -163,3 +163,5 @@ DOMElements.clearAll.addEventListener("click", () => {
 });
 
 updateList();
+
+updateList();
