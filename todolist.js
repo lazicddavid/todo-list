@@ -154,6 +154,10 @@ DOMElements.list.addEventListener("click", (e) => {
     taskList.remove(id);
     updateList();
   }
+  if (e.target.closest(".fa-trash")) {
+    taskList.remove(id);
+    updateList();
+  }
 });
 
 DOMElements.clearAll.addEventListener("click", () => {
@@ -161,7 +165,5 @@ DOMElements.clearAll.addEventListener("click", () => {
   taskList.clear();
   updateList();
 });
-
-updateList();
 
 updateList();
