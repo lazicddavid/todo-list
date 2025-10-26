@@ -115,16 +115,3 @@ body {
   transform: rotate(15deg);
   transition: transform 0.5 ease;
 }
-
-#clearAll {
-  cursor: pointer;
-  color: #271e1e;
-  border-radius: 10px;
-  border: none;
-  margin: 10px;
-  padding: 10px 25px;
-  background-color: #f9b09f5b;
-  margin-top: auto;
-  margin-left: 10px;
-  border: navajowhite;
-}
