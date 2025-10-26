@@ -115,3 +115,6 @@ body {
   transform: rotate(15deg);
   transition: transform 0.5 ease;
 }
+
+#isEdit {
+}
