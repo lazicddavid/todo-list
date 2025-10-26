@@ -75,47 +75,23 @@ const taskList = {
   },
 };
 
-// RENDER FUNKCIJA
 function updateList() {
   DOMElements.list.innerHTML = "";
 
   taskList.tasks.forEach((item) => {
-    // glavni kontejner za jedan task
     const taskEl = document.createElement("div");
     taskEl.className = "todo-item";
     taskEl.dataset.id = item.id;
 
-    // LEVA STRANA: ili paragraf ili input, zavisi od isEditing
     let mainContentEl;
     if (item.isEditing === true) {
-      // ako je u edit modu -> input
       const input = document.createElement("input");
       input.type = "text";
       input.value = item.text;
       input.className = "edit-input";
 
-      // kad izgubi fokus ili Enter -> završavamo edit
-      function saveAndClose() {
-        taskList.finishEdit(item.id, input.value);
-        updateList();
-      }
-
-      input.addEventListener("blur", saveAndClose);
-      input.addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter") {
-          saveAndClose();
-        }
-      });
-
-      // fokus odmah
-      queueMicrotask(() => {
-        input.focus();
-        input.select();
-      });
-
       mainContentEl = input;
     } else {
-      // ako NIJE u edit modu -> normalan tekst
       const textEl = document.createElement("p");
       textEl.className = "todo-text";
       textEl.textContent = item.text;
@@ -125,7 +101,6 @@ function updateList() {
       mainContentEl = textEl;
     }
 
-    // DESNA STRANA: dugmići
     const actions = document.createElement("div");
     actions.className = "actions";
     actions.innerHTML = `
@@ -144,7 +119,6 @@ function updateList() {
     DOMElements.list.appendChild(taskEl);
   });
 
-  // pokaži / sakrij Clear All
   if (taskList.tasks.length > 0) {
     DOMElements.clearAll.style.display = "";
   } else {
@@ -152,7 +126,6 @@ function updateList() {
   }
 }
 
-// menadžer input polja na vrhu forme
 const taskInput = {
   value: "",
   changeInput(value) {
@@ -167,12 +140,10 @@ const taskInput = {
   },
 };
 
-// kad kucaš u glavni input
 DOMElements.input.addEventListener("input", (e) => {
   taskInput.changeInput(e.target.value);
 });
 
-// kad submituješ formu (Add task)
 DOMElements.form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -184,7 +155,6 @@ DOMElements.form.addEventListener("submit", (e) => {
   updateList();
 });
 
-// delegacija klikova na dugmad unutar liste
 DOMElements.list.addEventListener("click", (e) => {
   const taskEl = e.target.closest(".todo-item");
   if (!taskEl) return;
@@ -192,7 +162,6 @@ DOMElements.list.addEventListener("click", (e) => {
   const id = taskEl.dataset.id;
   if (!id) return;
 
-  // vidimo koji je kliknuti action
   const btn = e.target.closest("button.icon-btn");
   if (!btn) return;
 
@@ -205,7 +174,6 @@ DOMElements.list.addEventListener("click", (e) => {
   }
 
   if (action === "edit") {
-    // klik na Edit: samo postavi isEditing = true i rerenderuj
     taskList.startEdit(id);
     updateList();
     return;
@@ -218,12 +186,10 @@ DOMElements.list.addEventListener("click", (e) => {
   }
 });
 
-// clear all dugme
 DOMElements.clearAll.addEventListener("click", () => {
   if (!taskList.tasks.length) return;
   taskList.clear();
   updateList();
 });
 
-// inicijalni render
 updateList();

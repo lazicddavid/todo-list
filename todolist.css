@@ -116,8 +116,12 @@ body {
   transition: transform 0.5 ease;
 }
 
-#isEdit {
-  padding: 10px;
-  margin: 20px auto;
-  text-align: center;
+#clearAll {
+  cursor: pointer;
+  color: #271e1e;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+  padding: 10px 25px;
+  background-color: #f9b09f5b;
 }
