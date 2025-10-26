@@ -21,6 +21,7 @@ const inputManager = {
 //kad se klikne na njega svi se taskovi isprazne
 
 console.log("---------------------------");
+
 const DOMElements = {
   form: document.getElementById("form"),
   input: document.getElementById("input"),
@@ -61,7 +62,7 @@ const taskList = {
     if (t) t.isEditing = true;
   },
 
-  finishEdit(id, newText) {
+  finishEditing(id, newText) {
     const t = this.tasks.find((x) => x.id === id);
     if (!t) return;
     if (newText && newText.trim() !== "") {
@@ -89,6 +90,18 @@ function updateList() {
       input.type = "text";
       input.value = item.text;
       input.className = "edit-input";
+
+      input.addEventListener("blur", () => {
+        taskList.finishEditing(item.id, input.value);
+        updateList();
+      });
+
+      input.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter") {
+          taskList.finishEditing(item.id, input.value);
+          updateList();
+        }
+      });
 
       mainContentEl = input;
     } else {
