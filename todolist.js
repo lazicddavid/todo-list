@@ -78,7 +78,7 @@ const taskList = {
 
 function updateList() {
   DOMElements.list.innerHTML = "";
-
+  //napraviti ovo kao u primeru ispod sa innerHTMl
   taskList.tasks.forEach((item) => {
     const taskEl = document.createElement("div");
     taskEl.className = "todo-item";
@@ -116,8 +116,9 @@ function updateList() {
 
     const actions = document.createElement("div");
     actions.className = "actions";
+    const isEdit = false;
     actions.innerHTML = `
-      <button class="icon-btn" data-action="mark" title="Mark">
+     <button class="icon-btn" data-action="mark" title="Mark">
         <i class="fa-regular fa-square-check"></i>
       </button>
       <button class="icon-btn" data-action="edit" title="Edit">
@@ -131,7 +132,7 @@ function updateList() {
     taskEl.append(mainContentEl, actions);
     DOMElements.list.appendChild(taskEl);
   });
-
+  //napraviti funkciju getTasks
   if (taskList.tasks.length > 0) {
     DOMElements.clearAll.style.display = "";
   } else {
@@ -187,6 +188,7 @@ DOMElements.list.addEventListener("click", (e) => {
   }
 
   if (action === "edit") {
+    ("");
     taskList.startEdit(id);
     updateList();
     return;
@@ -198,11 +200,10 @@ DOMElements.list.addEventListener("click", (e) => {
     return;
   }
 });
+//napraviti edit sa ovim event target propagation
 
 DOMElements.clearAll.addEventListener("click", () => {
   if (!taskList.tasks.length) return;
   taskList.clear();
   updateList();
 });
-
-updateList();
