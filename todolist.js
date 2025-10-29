@@ -75,45 +75,64 @@ const taskList = {
     this.tasks = [];
   },
 };
-
+//napraviti ovo kao u primeru ispod sa innerHTMl
 function updateList() {
-  DOMElements.list.innerHTML = "";
-  //napraviti ovo kao u primeru ispod sa innerHTMl
+  // 1. Krenemo od praznog HTML-a za listu
+  let html = "";
+
+  // 2. Prolazimo kroz sve taskove i za svaki gradimo jedan blok HTML-a
   taskList.tasks.forEach((item) => {
-    const taskEl = document.createElement("div");
-    taskEl.className = "todo-item";
-    taskEl.dataset.id = item.id;
+    // deo za glavni sadržaj (text ili input u zavisnosti od isEditing)
+    const mainContentHTML =
+      item.isEditing === true
+        ? `
+        <input
+          type="text"
+          class="edit-input"
+          value="${item.text}"
+          data-id="${item.id}"
+          data-role="edit-input"
+        />
+      `
+        : `
+        <p
+          class="todo-text"
+          style="text-decoration: ${item.isDone ? "line-through" : "none"}"
+        >
+          ${item.text}
+        </p>
+      `;
+    // jedna kartica taska (todo-item)
+    html += `
+      <div class="todo-item" data-id="${item.id}">
+        ${mainContentHTML}
+        ${actionsHTML}
+      </div>
+    `;
+  });
 
-    let mainContentEl;
-    if (item.isEditing === true) {
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = item.text;
-      input.className = "edit-input";
+  // 3. Upis u DOM samo jednom
+  DOMElements.list.innerHTML = html;
 
-      input.addEventListener("blur", () => {
-        taskList.finishEditing(item.id, input.value);
+  // 4. Sad moramo da vratimo ponašanje za input (blur i Enter)
+  // zato što sa innerHTML više nemamo addEventListener iznad
+  const editInputs = DOMElements.list.querySelectorAll('[data-role="edit-input"]');
+  editInputs.forEach((inputEl) => {
+    const currentId = inputEl.getAttribute("data-id");
+
+    inputEl.addEventListener("blur", () => {
+      taskList.finishEditing(currentId, inputEl.value);
+      updateList();
+    });
+
+    inputEl.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter") {
+        taskList.finishEditing(currentId, inputEl.value);
         updateList();
-      });
-
-      input.addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter") {
-          taskList.finishEditing(item.id, input.value);
-          updateList();
-        }
-      });
-
-      mainContentEl = input;
-    } else {
-      const textEl = document.createElement("p");
-      textEl.className = "todo-text";
-      textEl.textContent = item.text;
-      if (item.isDone) {
-        textEl.style.textDecoration = "line-through";
       }
-      mainContentEl = textEl;
-    }
-
+    });
+  });
+}
     const actions = document.createElement("div");
     actions.className = "actions";
     const isEdit = false;
