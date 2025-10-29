@@ -133,10 +133,18 @@ function updateList() {
     DOMElements.list.appendChild(taskEl);
   });
   //napraviti funkciju getTasks
+  /*
   if (taskList.tasks.length > 0) {
     DOMElements.clearAll.style.display = "";
   } else {
     DOMElements.clearAll.style.display = "none";
+  }
+}
+  */
+
+  function clearButtons() {
+    const tasks = taskList.getTasks().length > 0;
+    DOMElements.clearAll.style.display = tasks ? "" : "none";
   }
 }
 
