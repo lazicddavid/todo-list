@@ -442,6 +442,8 @@ DOMElements.list.addEventListener("click", (e) => {
   }
 });
 
+//napraviti edit sa ovim event target propagation
+
 // Clear All
 DOMElements.clearAll.addEventListener("click", () => {
   if (!taskList.tasks.length) return;
@@ -449,5 +451,4 @@ DOMElements.clearAll.addEventListener("click", () => {
   updateList();
 });
 
-// inicijalno sakrij dugme Clear All kad nema taskova
 DOMElements.clearAll.style.display = "none";
