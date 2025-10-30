@@ -113,20 +113,15 @@ body {
   transition: transform 0.5 ease;
 }
 
-.fa-pen-to-square:hover {
+.fa-square-check:hover {
   color: #c64b4b;
   transform: rotate(15deg);
   transition: transform 0.5 ease;
 }
-
-#clearAll {
-  cursor: pointer;
-  color: #271e1e;
-  border-radius: 10px;
-  border: none;
-  margin: 10px;
-  padding: 10px 25px;
-  background-color: #f9b09f5b;
+.fa-pen-to-square:hover {
+  color: #c64b4b;
+  transform: rotate(15deg);
+  transition: transform 0.5 ease;
 }
 
 #clearAll {
