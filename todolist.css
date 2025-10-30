@@ -96,10 +96,6 @@ body {
   opacity: 1;
 }
 
-.icon-btn:hover {
-  opacity: 1;
-}
-
 .icon-btn i {
   font-size: 20px;
   color: peru;
@@ -131,4 +127,7 @@ body {
   margin: 10px;
   padding: 10px 25px;
   background-color: #f9b09f5b;
+}
+
+.footer {
 }
