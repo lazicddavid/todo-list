@@ -131,4 +131,5 @@ body {
 
 .button-clear {
   display: flex;
+  align-content: center;
 }
