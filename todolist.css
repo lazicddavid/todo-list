@@ -129,7 +129,5 @@ body {
   background-color: #f9b09f5b;
 }
 
-.actions {
-  display: flex;
-  justify-content: center;
+.button-clear {
 }
