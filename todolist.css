@@ -132,4 +132,5 @@ body {
 .button-clear {
   display: flex;
   align-content: center;
+  margin-bottom: 10px;
 }
