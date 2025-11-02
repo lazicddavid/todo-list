@@ -130,4 +130,5 @@ body {
 }
 
 .card__header {
+  border-radius: 20px;
 }
