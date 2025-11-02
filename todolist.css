@@ -128,9 +128,3 @@ body {
   padding: 10px 25px;
   background-color: #f9b09f5b;
 }
-
-.button-clear {
-  display: flex;
-  align-content: center;
-  margin-bottom: 10px;
-}

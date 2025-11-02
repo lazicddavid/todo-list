@@ -4,17 +4,32 @@ const DOMElements = {
   list: document.getElementById("list"),
   clearAll: document.getElementById("clearAll"),
 };
+
 function createTask(text) {
-  const item = {
+  return {
     id: crypto.randomUUID(),
     text,
     isDone: false,
     isEditing: false,
+
+    toggleDone() {
+      this.isDone = !this.isDone;
+    },
+    startEdit() {
+      this.isEditing = true;
+    },
+    finishEdit(newText) {
+      if (typeof newText === "string" && newText !== "") {
+        this.text = newText;
+      }
+      this.isEditing = false;
+    },
   };
-  return item;
 }
+
 const taskList = {
   tasks: [],
+  activeId: null,
 
   add(item) {
     this.tasks.push(item);
@@ -23,34 +38,24 @@ const taskList = {
 
   remove(id) {
     this.tasks = this.tasks.filter((item) => item.id !== id);
+    if (this.activeId === id) this.activeId = null;
   },
 
-  editText(id, newText) {
-    const item = this.tasks.find((task) => task.id === id);
-    if (item) item.text = newText;
+  getById(id) {
+    return this.tasks.find((task) => task.id === id) || null;
   },
 
-  toggleDone(id) {
-    const t = this.tasks.find((x) => x.id === id);
-    if (t) t.isDone = !t.isDone;
+  setActive(id) {
+    this.activeId = id;
   },
 
-  startEdit(id) {
-    const t = this.tasks.find((x) => x.id === id);
-    if (t) t.isEditing = true;
-  },
-
-  finishEditing(id, newText) {
-    const t = this.tasks.find((x) => x.id === id);
-    if (!t) return;
-    if (newText && newText.trim() !== "") {
-      t.text = newText.trim();
-    }
-    t.isEditing = false;
+  getActive() {
+    return this.getById(this.activeId);
   },
 
   clear() {
     this.tasks = [];
+    this.activeId = null;
   },
 
   getTasks() {
@@ -75,29 +80,28 @@ function updateList() {
     </div>
   `;
 
-  taskList.tasks.forEach((item) => {
-    const mainContentHTML =
-      item.isEditing === true
-        ? `
+  taskList.tasks.forEach((task) => {
+    const mainContentHTML = task.isEditing
+      ? `
         <input
           type="text"
           class="edit-input"
-          value="${item.text}"
-          data-id="${item.id}"
+          value="${task.text}"
+          data-id="${task.id}"
           data-role="edit-input"
         />
       `
-        : `
+      : `
         <p
           class="todo-text"
-          style="text-decoration: ${item.isDone ? "line-through" : "none"}"
+          style="text-decoration: ${task.isDone ? "line-through" : "none"}"
         >
-          ${item.text}
+          ${task.text}
         </p>
       `;
 
     html += `
-      <div class="todo-item" data-id="${item.id}">
+      <div class="todo-item" data-id="${task.id}">
         ${mainContentHTML}
         ${actionsHTML}
       </div>
@@ -105,28 +109,7 @@ function updateList() {
   });
 
   DOMElements.list.innerHTML = html;
-
   DOMElements.clearAll.style.display = taskList.tasks.length > 0 ? "" : "none";
-
-  const editInputs = DOMElements.list.querySelectorAll(
-    '[data-role="edit-input"]'
-  );
-
-  editInputs.forEach((inputEl) => {
-    const currentId = inputEl.getAttribute("data-id");
-
-    inputEl.addEventListener("blur", () => {
-      taskList.finishEditing(currentId, inputEl.value);
-      updateList();
-    });
-
-    inputEl.addEventListener("keydown", (ev) => {
-      if (ev.key === "Enter") {
-        taskList.finishEditing(currentId, inputEl.value);
-        updateList();
-      }
-    });
-  });
 }
 
 const taskInput = {
@@ -139,50 +122,64 @@ const taskInput = {
     DOMElements.input.value = "";
   },
   getValue() {
-    return this.value.trim();
+    return this.value;
   },
 };
 
-DOMElements.input.addEventListener("input", (e) => {
-  taskInput.changeInput(e.target.value);
+DOMElements.input.addEventListener("input", (event) => {
+  taskInput.changeInput(event.target.value);
 });
 
-DOMElements.form.addEventListener("submit", (e) => {
-  e.preventDefault();
+DOMElements.form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
   const text = taskInput.getValue();
   if (!text) return;
+
   const task = createTask(text);
   taskList.add(task);
   taskInput.reset();
   updateList();
 });
 
-DOMElements.list.addEventListener("click", (e) => {
-  const taskEl = e.target.closest(".todo-item");
-  if (!taskEl) return;
+DOMElements.list.addEventListener("click", (event) => {
+  const taskElement = event.target.closest(".todo-item");
+  if (!taskElement) return;
 
-  const id = taskEl.dataset.id;
+  const id = taskElement.dataset.id;
   if (!id) return;
 
-  const btn = e.target.closest("button.icon-btn");
-  if (!btn) return;
+  const buttonElement = event.target.closest("button.icon-btn");
+  if (!buttonElement) return;
 
-  const action = btn.dataset.action;
+  const actionName = buttonElement.dataset.action;
+  const foundTask = taskList.getById(id);
+  if (!foundTask) return;
 
-  if (action === "mark") {
-    taskList.toggleDone(id);
+  if (actionName === "mark") {
+    foundTask.toggleDone();
     updateList();
     return;
   }
 
-  if (action === "edit") {
-    taskList.startEdit(id);
-    updateList();
+  if (actionName === "edit") {
+    if (!foundTask.isEditing) {
+      taskList.setActive(id);
+      foundTask.startEdit();
+      updateList();
+    } else {
+      const inputElement = taskElement.querySelector(
+        '[data-role="edit-input"]'
+      );
+      const newText = inputElement ? inputElement.value : "";
+      foundTask.finishEdit(newText);
+      taskList.setActive(null);
+      updateList();
+    }
     return;
   }
 
-  if (action === "delete") {
+  if (actionName === "delete") {
     taskList.remove(id);
     updateList();
     return;
