@@ -84,16 +84,19 @@ body {
   gap: 14px;
 }
 
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 .icon-btn {
   border: none;
   background: transparent;
   padding: 0;
   opacity: 0.9;
   cursor: default;
-}
-
-.icon-btn:hover {
-  opacity: 1;
 }
 
 .icon-btn:hover {
