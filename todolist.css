@@ -84,13 +84,6 @@ body {
   gap: 14px;
 }
 
-.actions {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
 .icon-btn {
   border: none;
   background: transparent;
