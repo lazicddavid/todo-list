@@ -101,6 +101,11 @@ body {
   color: peru;
 }
 
+.icon-btn i {
+  font-size: 20px;
+  color: peru;
+}
+
 .fa-trash:hover {
   color: #c64b4b;
   transform: rotate(15deg);
@@ -113,11 +118,6 @@ body {
   transition: transform 0.5 ease;
 }
 
-.fa-pen-to-square:hover {
-  color: #c64b4b;
-  transform: rotate(15deg);
-  transition: transform 0.5 ease;
-}
 .fa-pen-to-square:hover {
   color: #c64b4b;
   transform: rotate(15deg);
