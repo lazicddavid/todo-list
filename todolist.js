@@ -26,43 +26,44 @@ function createTask(text) {
     },
   };
 }
+function createTaskList() {
+  return {
+    tasks: [],
+    activeId: null,
 
-const taskList = {
-  tasks: [],
-  activeId: null,
+    add(item) {
+      this.tasks.push(item);
+      return item;
+    },
 
-  add(item) {
-    this.tasks.push(item);
-    return item;
-  },
+    remove(id) {
+      this.tasks = this.tasks.filter((item) => item.id !== id);
+      if (this.activeId === id) this.activeId = null;
+    },
 
-  remove(id) {
-    this.tasks = this.tasks.filter((item) => item.id !== id);
-    if (this.activeId === id) this.activeId = null;
-  },
+    getById(id) {
+      return this.tasks.find((task) => task.id === id) || null;
+    },
 
-  getById(id) {
-    return this.tasks.find((task) => task.id === id) || null;
-  },
+    setActive(id) {
+      this.activeId = id;
+    },
 
-  setActive(id) {
-    this.activeId = id;
-  },
+    getActive() {
+      return this.getById(this.activeId);
+    },
 
-  getActive() {
-    return this.getById(this.activeId);
-  },
+    clear() {
+      this.tasks = [];
+      this.activeId = null;
+    },
 
-  clear() {
-    this.tasks = [];
-    this.activeId = null;
-  },
-
-  getTasks() {
-    return this.tasks;
-  },
-};
-
+    getTasks() {
+      return this.tasks;
+    },
+  };
+}
+const taskList = createTaskList();
 function updateList() {
   let html = "";
 

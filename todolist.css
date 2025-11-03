@@ -129,6 +129,12 @@ body {
   background-color: #f9b09f5b;
 }
 
-.card__header {
-  border-radius: 20px;
+#clearAll {
+  cursor: pointer;
+  color: #271e1e;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+  padding: 10px 25px;
+  background-color: #f9b09f5b;
 }
